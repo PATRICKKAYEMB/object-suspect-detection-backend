@@ -1,0 +1,56 @@
+# --- PYTHON & CACHE ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- DJANGO ---
+db.sqlite3
+*.log
+local_settings.py
+# NE PAS IGNORER settings.py car il ne contient plus de secrets grâce au .env
+# supect_object_alert/supect_object_alert/settings.py <- Retire cette ligne
+
+# --- MÉDIAS & DÉTECTIONS ---
+# On ne veut pas envoyer 1000 photos de couteaux sur GitHub !
+media/
+detections/
+detections/*.jpg
+detections/*.png
+detections/*.jpeg
+staticfiles/
+
+# --- SÉCURITÉ (CRITIQUE) ---
+.env
+*.env
+credentials.json
+serviceAccountKey.json
+service-account.json
+
+# --- IDE & SYSTÈME ---
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# --- TESTS ---
+.coverage
+htmlcov/
