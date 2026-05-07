@@ -6,7 +6,6 @@ class AlertConfig(AppConfig):
     name = 'alert'
 
     def ready(self):
-        # On utilise le chemin complet à partir de la racine du projet
         
         import alert.signals
         

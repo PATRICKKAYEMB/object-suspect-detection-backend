@@ -11,7 +11,6 @@ def notify_security_team(title, message, detection_event_id=None):
     Lance la tâche Celery pour alerter uniquement l'équipe de sécurité.
     """
     try:
-        # On garde l'appel vers la tâche Celery
         task = send_global_notification_task.delay(
             title=title,
             message=message,

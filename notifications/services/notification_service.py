@@ -146,9 +146,6 @@ class NotificationService:
                 return False
 
             subject = f"{notification.title}"
-            
-            # CORRECTION : On utilise username ou first_name au lieu de full_name
-            # On peut aussi utiliser getattr pour éviter que ça plante si le champ manque
             display_name = getattr(user, 'first_name', user.username)
 
             message = f"""
@@ -169,7 +166,7 @@ class NotificationService:
             return True
                 
         except Exception as e:
-            # C'est ici que tu voyais l'erreur 'full_name'
+          
             logger.error(f"Erreur envoi email notification: {e}")
             return False
         

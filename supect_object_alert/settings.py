@@ -27,7 +27,7 @@ DEBUG = os.getenv("DEBUG") == "True"
 # Application definition
 
 INSTALLED_APPS = [
-    "daphne",           # 1. DOIT ÊTRE ICI
+    "daphne",          
     "channels",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -138,12 +138,10 @@ CHANNEL_LAYERS = {
     },
 }
 
-# settings.py
 ALLOWED_HOSTS = ['10.47.8.228', '127.0.0.1', 'localhost','10.104.156.228','10.236.204.228','10.73.12.228']
-# Ou pour le développement rapide :
 ALLOWED_HOSTS = ['*']
 
-AUTH_USER_MODEL = 'alert.User'  # Remplace 'alert' par le nom de ton app si besoin
+AUTH_USER_MODEL = 'alert.User' 
 
 
 REST_FRAMEWORK = {

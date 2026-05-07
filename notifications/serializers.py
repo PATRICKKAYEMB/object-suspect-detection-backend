@@ -11,7 +11,7 @@ class NotificationSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Notification
-        # On a supprimé notification_type qui n'existe pas dans ton modèle
+        
         fields = [
             'id', 'title', 'message', 'channel', 'channel_display', 
             'status', 'is_read', 'metadata', 'created_at', 'read_at', 'time_ago'
@@ -28,7 +28,7 @@ class NotificationSerializer(serializers.ModelSerializer):
 class MarkAsReadSerializer(serializers.Serializer):
     """Serializer pour marquer les notifications comme lues"""
     notification_ids = serializers.ListField(
-        child=serializers.IntegerField(), # Corrigé : ton modèle utilise des entiers
+        child=serializers.IntegerField(), 
         required=True
     )
     read = serializers.BooleanField(default=True)
@@ -48,6 +48,5 @@ class DeviceFcmTokenSerializer(serializers.ModelSerializer):
     """Serializer pour les tokens FCM"""
     class Meta:
         model = DeviceFcmToken
-        # Suppression de device_id qui n'est pas dans ton modèle
         fields = ['id', 'user', 'fcm_token', 'created_at']
         read_only_fields = ['id', 'created_at']

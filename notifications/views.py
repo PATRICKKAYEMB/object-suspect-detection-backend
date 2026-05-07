@@ -9,7 +9,7 @@ from .serializers import (
     NotificationSerializer, 
   
     DeviceFcmTokenSerializer,
-    MarkAsReadSerializer # Importation nécessaire pour la validation
+    MarkAsReadSerializer
 )
 from .tasks import send_global_notification_task
 
@@ -19,7 +19,6 @@ class NotificationViewSet(viewsets.ModelViewSet):
     """
     serializer_class = NotificationSerializer
     permission_classes = [IsAuthenticated]
-    # On ajoute 'post' car mark_as_read et mark_all_as_read sont des POST
     http_method_names = ['get', 'post', 'patch', 'delete']
 
     def get_queryset(self):
@@ -67,7 +66,6 @@ class DeviceFcmTokenViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        # On évite les doublons de tokens pour un même utilisateur
         token = self.request.data.get('fcm_token')
         DeviceFcmToken.objects.filter(user=self.request.user, fcm_token=token).delete()
         serializer.save(user=self.request.user)

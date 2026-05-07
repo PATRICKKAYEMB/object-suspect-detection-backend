@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import DetectionEvent,Camera, ObjectType,User
-# Register your models here.
 
 
 admin.site.register(DetectionEvent)

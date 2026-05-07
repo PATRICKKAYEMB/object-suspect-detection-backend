@@ -14,7 +14,7 @@ django.setup()
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
     
-    "websocket": JWTAuthMiddleware( # 🛡️ On protège les routes ici
+    "websocket": JWTAuthMiddleware(
         URLRouter(
             notifications_ws
         )

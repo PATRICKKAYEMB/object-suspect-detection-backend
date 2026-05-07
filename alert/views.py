@@ -21,9 +21,9 @@ class ConnexionAPIView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        print(f"--- DATA REÇUE ---")
-        print(f"Type: {type(request.data)}")
-        print(f"Contenu: {request.data}")
+        #print(f"--- DATA REÇUE ---")
+        #print(f"Type: {type(request.data)}")
+        #print(f"Contenu: {request.data}")
         email = request.data.get("email")
         password = request.data.get("password")
 
@@ -33,8 +33,6 @@ class ConnexionAPIView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Note: Puisque USERNAME_FIELD = 'email' dans ton modèle User, 
-        # authenticate va vérifier l'email.
         user = authenticate(request, email=email, password=password)
 
         if not user:
@@ -63,19 +61,18 @@ class ConnexionAPIView(APIView):
 # DETECTION EVENTS VIEWSET
 # ==========================
 
-class DetectionEventViewSet(viewsets.ModelViewSet): # Changé en ModelViewSet pour plus de facilité
+class DetectionEventViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = DetectionEventSerializer
 
     def get_queryset(self):
-        # CORRECTION : Utilisation de 'timestamp' au lieu de 'created_at'
         return DetectionEvent.objects.select_related(
             "camera",
             "object_type"
         ).all().order_by("-timestamp")
 
     # --------------------------
-    # CREATE (Pour le Jetson Nano)
+    # CREATE 
     # --------------------------
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -112,7 +109,7 @@ class DetectionEventViewSet(viewsets.ModelViewSet): # Changé en ModelViewSet po
         return Response(serializer.data)
 
     # --------------------------
-    # STATS (Optimisées)
+    # STATS 
     # --------------------------
     @action(detail=False, methods=["get"])
     def stats(self, request):
@@ -123,7 +120,6 @@ class DetectionEventViewSet(viewsets.ModelViewSet): # Changé en ModelViewSet po
 
         total_events = queryset.count()
 
-        # CORRECTION : Utilisation de 'timestamp'
         today_events = queryset.filter(timestamp__date=today).count()
 
         last_7_days_events = queryset.filter(timestamp__gte=last_7_days).count()

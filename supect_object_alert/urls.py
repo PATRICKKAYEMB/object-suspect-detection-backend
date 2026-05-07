@@ -26,7 +26,5 @@ urlpatterns = [
     path('api/notifications/', include('notifications.urls')),
 ]
 
-# On ajoute la gestion des fichiers médias uniquement en mode DEBUG (développement)
 if settings.DEBUG:
-    # Cette ligne lie /media/ au dossier défini dans MEDIA_ROOT
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

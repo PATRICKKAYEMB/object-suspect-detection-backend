@@ -14,7 +14,6 @@ def send_global_notification_task(self, title, message, detection_event_id=None)
     Envoie une notification à ABSOLUMENT TOUS les utilisateurs enregistrés.
     """
     try:
-        # On récupère tout le monde sans filtrage
         users = User.objects.all()
         
         if not users.exists():
@@ -22,7 +21,6 @@ def send_global_notification_task(self, title, message, detection_event_id=None)
             return False
 
         for user in users:
-            # 1. Création systématique de la notification en base de données
             notification = Notification.objects.create(
                 user=user,
                 detection_event_id=detection_event_id,
@@ -51,5 +49,4 @@ def send_global_notification_task(self, title, message, detection_event_id=None)
 
     except Exception as e:
         logger.error(f"Erreur lors de la tâche de notification globale : {e}")
-        # En cas d'erreur (ex: problème réseau avec Firebase), on réessaie 3 fois
         raise self.retry(exc=e, countdown=10)

@@ -20,7 +20,7 @@ class DetectionEventSerializer(serializers.ModelSerializer):
     On utilise des PrimaryKeyRelatedField pour permettre au Jetson d'envoyer les IDs,
     mais on affiche les détails complets pour l'application mobile.
     """
-    # Pour la lecture (GET) : affiche les objets imbriqués
+    
     camera_details = CameraSerializer(source='camera', read_only=True)
     object_details = ObjectTypeSerializer(source='object_type', read_only=True)
 
@@ -28,14 +28,13 @@ class DetectionEventSerializer(serializers.ModelSerializer):
         model = DetectionEvent
         fields = [
             'id', 
-            'camera',          # Utilisé pour l'envoi (ID)
-            'object_type',     # Utilisé pour l'envoi (ID)
-            'camera_details',  # Utilisé pour l'affichage (Lecture seule)
-            'object_details',  # Utilisé pour l'affichage (Lecture seule)
+            'camera',     
+            'object_type',  
+            'camera_details', 
+            'object_details', 
             'confidence', 
             'image', 
             'timestamp', 
             'processed'
         ]
-        # Le timestamp est généré automatiquement par le modèle
         read_only_fields = ['id', 'timestamp']

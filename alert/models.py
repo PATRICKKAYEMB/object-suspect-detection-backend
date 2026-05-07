@@ -10,8 +10,8 @@ class User(AbstractUser):
     )
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='agent')
     email = models.EmailField(unique=True)
-    USERNAME_FIELD = 'email'  #  Obligatoire pour se connecter avec l'email
-    REQUIRED_FIELDS = ['username'] # Champs demandés lors du createsuperuser
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username'] 
 
     groups = models.ManyToManyField(
         Group,
@@ -38,7 +38,6 @@ class Camera(models.Model):
     )
 
     name = models.CharField(max_length=100)
-    # 🔑 Identifiant unique pour le Jetson (ex: "CAM_ENTREE_01")
     camera_code = models.CharField(max_length=50, unique=True, help_text="ID textuel utilisé par le Jetson")
     location = models.CharField(max_length=255)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
@@ -50,9 +49,8 @@ class Camera(models.Model):
 #  ObjectType
 class ObjectType(models.Model):
     label = models.CharField(max_length=100)
-    # Identifiant textuel unique (ex: "couteau", "pistolet")
     slug = models.SlugField(max_length=100, unique=True, help_text="Identifiant unique pour l'IA")
-    danger_level = models.IntegerField()  # 1 (low) - 5 (critical)
+    danger_level = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -60,7 +58,6 @@ class ObjectType(models.Model):
 
 #  DetectionEvent
 class DetectionEvent(models.Model):
-    # On lie toujours aux modèles, mais on utilisera le code/slug pour l'insertion
     camera = models.ForeignKey(Camera, on_delete=models.CASCADE, related_name="detections")
     object_type = models.ForeignKey(ObjectType, on_delete=models.CASCADE, related_name="detections")
 
