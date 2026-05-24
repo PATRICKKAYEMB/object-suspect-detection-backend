@@ -1,6 +1,33 @@
 # supect_object_alert/asgi.py
 import os
 import django
+
+from django.core.asgi import get_asgi_application
+from channels.routing import ProtocolTypeRouter, URLRouter
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "supect_object_alert.settings")
+
+django.setup()
+
+# IMPORTS APRÈS setup()
+from notifications.middleware import JWTAuthMiddleware
+from notifications.routing import notifications_ws
+
+application = ProtocolTypeRouter({
+    "http": get_asgi_application(),
+
+    "websocket": JWTAuthMiddleware(
+        URLRouter(
+            notifications_ws
+        )
+    ),
+})
+
+
+
+
+''' import os
+import django
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
 
@@ -20,3 +47,4 @@ application = ProtocolTypeRouter({
         )
     ),
 })
+'''
