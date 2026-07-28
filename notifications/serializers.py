@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class NotificationSerializer(serializers.ModelSerializer):
-    """Serializer pour les notifications - Adapté à ton modèle réel"""
+    """Serializer pour les notifications"""
     time_ago = serializers.SerializerMethodField()
     channel_display = serializers.CharField(source='get_channel_display', read_only=True)
     

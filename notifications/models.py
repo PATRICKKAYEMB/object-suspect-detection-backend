@@ -8,8 +8,7 @@ from alert.models import DetectionEvent
 User = get_user_model()
 
 class Notification(models.Model):
-    # CRUCIAL : Même si le système envoie, on a besoin de savoir à quel 
-    # utilisateur appartient cette instance de notification pour le suivi (lu/non lu).
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

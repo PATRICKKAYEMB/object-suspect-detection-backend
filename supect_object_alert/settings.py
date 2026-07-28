@@ -139,7 +139,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-ALLOWED_HOSTS = ['10.47.8.228', '127.0.0.1', 'localhost','10.104.156.228','10.236.204.228','10.73.12.228']
+ALLOWED_HOSTS = ['10.84.219.149', '127.0.0.1', 'localhost','10.84.219.149','10.236.204.228','10.73.12.228']
 ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'alert.User' 

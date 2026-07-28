@@ -1,4 +1,3 @@
-# notifications/utils.py
 
 from notifications.tasks import send_global_notification_task
 import logging
@@ -8,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 def notify_security_team(title, message, detection_event_id=None):
     """
-    Lance la tâche Celery pour alerter uniquement l'équipe de sécurité.
+    Lance la tâche Celery.
     """
     try:
         task = send_global_notification_task.delay(

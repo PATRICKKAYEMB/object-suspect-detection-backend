@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.utils.text import slugify
 
-#  User
+
 class User(AbstractUser):
     ROLE_CHOICES = (
         ('admin', 'Admin'),
@@ -30,7 +30,7 @@ class User(AbstractUser):
 
 
 
-# Camera
+
 class Camera(models.Model):
     STATUS_CHOICES = (
         ('active', 'Active'),
@@ -46,7 +46,7 @@ class Camera(models.Model):
     def __str__(self):
         return f"{self.name} ({self.camera_code})"
 
-#  ObjectType
+
 class ObjectType(models.Model):
     label = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True, help_text="Identifiant unique pour l'IA")

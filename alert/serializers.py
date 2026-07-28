@@ -1,4 +1,3 @@
-# alert/serializers.py
 from rest_framework import serializers
 from .models import Camera, ObjectType, DetectionEvent
 
@@ -9,7 +8,7 @@ class CameraSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'camera_code', 'location', 'status', 'created_at']
 
 class ObjectTypeSerializer(serializers.ModelSerializer):
-    """Serializer pour les types d'objets (IA)"""
+    """Serializer pour les types d'objets"""
     class Meta:
         model = ObjectType
         fields = ['id', 'label', 'slug', 'danger_level', 'created_at']
@@ -17,8 +16,7 @@ class ObjectTypeSerializer(serializers.ModelSerializer):
 class DetectionEventSerializer(serializers.ModelSerializer):
     """
     Serializer pour les événements de détection.
-    On utilise des PrimaryKeyRelatedField pour permettre au Jetson d'envoyer les IDs,
-    mais on affiche les détails complets pour l'application mobile.
+    
     """
     
     camera_details = CameraSerializer(source='camera', read_only=True)

@@ -21,9 +21,7 @@ class ConnexionAPIView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        #print(f"--- DATA REÇUE ---")
-        #print(f"Type: {type(request.data)}")
-        #print(f"Contenu: {request.data}")
+        
         email = request.data.get("email")
         password = request.data.get("password")
 
