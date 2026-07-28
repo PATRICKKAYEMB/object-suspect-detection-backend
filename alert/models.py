@@ -38,19 +38,17 @@ class Camera(models.Model):
     )
 
     name = models.CharField(max_length=100)
-    camera_code = models.CharField(max_length=50, unique=True, help_text="ID textuel utilisé par le Jetson")
-    location = models.CharField(max_length=255)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
     created_at = models.DateTimeField(auto_now_add=True)
+    latitude= models.FloatField(null=True,blank=True)
+    longitude = models.FloatField(null=True,blank=True)
 
     def __str__(self):
-        return f"{self.name} ({self.camera_code})"
+        return f"{self.name}"
 
 
 class ObjectType(models.Model):
     label = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, unique=True, help_text="Identifiant unique pour l'IA")
-    danger_level = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

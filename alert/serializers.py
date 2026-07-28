@@ -5,13 +5,13 @@ class CameraSerializer(serializers.ModelSerializer):
     """Serializer pour les caméras"""
     class Meta:
         model = Camera
-        fields = ['id', 'name', 'camera_code', 'location', 'status', 'created_at']
+        fields = ['id', 'name', 'latitude','longitude', 'status', 'created_at']
 
 class ObjectTypeSerializer(serializers.ModelSerializer):
     """Serializer pour les types d'objets"""
     class Meta:
         model = ObjectType
-        fields = ['id', 'label', 'slug', 'danger_level', 'created_at']
+        fields = ['id', 'label',  'created_at']
 
 class DetectionEventSerializer(serializers.ModelSerializer):
     """
